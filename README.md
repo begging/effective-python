@@ -1,3 +1,4 @@
+### The Review of 
 ### Effective Python: 59 Specific Ways to Write Better Python
 #### Brett Slatkin
 
@@ -25,3 +26,12 @@
 - Item 19: Provide Optional Behavior with Keyword Arguments
 - Item 20: Use None and Docstrings to Specify Dynamic Default Arguments
 - Item 21: Enforce Clarity with Keyword-Only Arguments
+
+### Chapter 3: Classes and Inheritance
+- Item 22: Prefer Helper Classes Over Bookkeeping with Dictionaries and Tuples
+- Item 23: Accept Functions for Simple Interfaces Instead of Classes
+- Item 24: Use @classmethod Polymorphism to Construct Objects Generically
+- Item 25: Initialize Parent Classes with super
+- Item 26: Use Multiple Inheritance Only for Mix-in Utility Classes
+- Item 27: Prefer Public Attributes Over Private Ones
+- Item 28: Inherit from collections.abc for Custom Container Types
