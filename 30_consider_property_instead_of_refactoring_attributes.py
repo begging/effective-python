@@ -1,5 +1,10 @@
 from datetime import datetime, timedelta
 
+'''
+A leaky bucket quota using plain Python objects.
+The problem with this implementation is that I never know what quota level the
+bucket started with.
+'''
 class Bucket(object):
     def __init__(self, period):
         self.period_delta = timedelta(seconds=period)
@@ -27,6 +32,15 @@ def deduct(bucket, amount):
     return True
 
 
+'''
+This is extremely helpful because it lets you migrate all existing usage of a
+class to have new behaviors without rewriting any of the call sites.
+
+It also provides an important stopgap for improving your interfaces over time.
+
+The best part is that the code using Bucket.quota doesn’t have to change or
+know that the class has changed.
+'''
 class Bucket(object):
     def __init__(self, period):
         self.period_delta = timedelta(seconds=period)
