@@ -152,3 +152,52 @@ second_exam = Exam()
 second_exam.writing_grade = 75
 print('First', first_exam.writing_grade, 'is right')
 print('Second', second_exam.writing_grade, 'is right')
+print(first_exam.__dict__)
+print(second_exam.__dict__)
+
+
+'''
+If I define grade attributes as instances of Grade(), these __get__, __set__
+method doesn't work.
+
+In short, when an Exam instance doesn’t have an attribute named writing_grade,
+Python will fall back to the Exam class’s attribute instead.
+
+If this class attribute is an object that has __get__ and __set__ methods,
+Python will assume you want to follow the descriptor protocol.
+'''
+from weakref import WeakKeyDictionary
+
+class Grade(object):
+    def __init__(self):
+        # self._values = {}
+        self._values = WeakKeyDictionary()
+
+    def __get__(self, instance, instance_type):
+        print(instance)
+        if instance is None:
+            return self
+        return self._values.get(instance, 0)
+
+    def __set__(self, instance, value):
+        print(instance)
+        if not (0 <= value <= 100):
+            raise ValueError('Grade must be between 0 and 100')
+        self._values[instance] = value
+
+
+class Exam(object):
+    # Class attributes
+    def __init__(self):
+        self.math_grade = Grade()
+        self.writing_grade = Grade()
+        self.science_grade = Grade()
+
+first_exam = Exam()
+first_exam.writing_grade = 82
+second_exam = Exam()
+second_exam.writing_grade = 75
+print('First', first_exam.writing_grade, 'is right')
+print('Second', second_exam.writing_grade, 'is right')
+
+print(first_exam.__dict__)
