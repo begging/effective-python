@@ -107,3 +107,29 @@ or getattr is run on an object.
 data = ValidatingDB()
 print('foo exists:', hasattr(data, 'foo'))
 print('foo exists:', hasattr(data, 'foo'))
+print()
+
+
+'''
+The __setattr__ method is always called every time an attribute is assigned on
+an instance (either directly or through the setattr built-in function).
+'''
+class SavingDB(object):
+    def __setattr__(self, name, value):
+        # Save some data to the DB log
+        print('save log:', name, value)
+        super().__setattr__(name, value)
+
+
+class LoggingSavingDB(SavingDB):
+    def __setattr__(self, name, value):
+        print('Called __setattr__(%s, %r)' % (name, value))
+        super().__setattr__(name, value)
+
+
+data = LoggingSavingDB()
+print('Before:', data.__dict__)
+data.foo = 5
+print('After:', data.__dict__)
+data.foo = 7
+print('Finally:', data.__dict__)
