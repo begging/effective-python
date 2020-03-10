@@ -79,3 +79,31 @@ data = ValidatingDB()
 print('exists:', data.exists)
 print('foo:', data.foo)
 print('foo:', data.foo)
+
+
+
+'''
+Python code implementing generic functionality often relies on the hasattr
+built-in function to determine when properties exist, and the getattr built-in
+function to retrieve property values.
+
+These functions also look in the instance dictionary for an attribute name
+before calling __getattr__.
+'''
+data = LoggingLazyDB()
+print('Before:', data.__dict__)
+# How do I make this false? actually data instance has no 'foo' attribute.
+print('foo exists:', hasattr(data, 'foo'))
+print('After:', data.__dict__)
+print('foo exists:', hasattr(data, 'foo'))
+print()
+
+
+'''
+In the example above, __getattr__ is only called once. In contrast, classes
+that implement __getattribute__ will have that method called each time hasattr
+or getattr is run on an object.
+'''
+data = ValidatingDB()
+print('foo exists:', hasattr(data, 'foo'))
+print('foo exists:', hasattr(data, 'foo'))
