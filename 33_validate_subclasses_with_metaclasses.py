@@ -26,6 +26,7 @@ class Triangle(Polygon):
 The __new__ method of metaclasses is run after the class statement’s entire
 body has been processe
 '''
+print()
 class Line(Polygon):
     print('Before sides')
     sides = 1
