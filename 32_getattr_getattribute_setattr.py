@@ -133,3 +133,50 @@ data.foo = 5
 print('After:', data.__dict__)
 data.foo = 7
 print('Finally:', data.__dict__)
+print()
+
+'''
+The problem with __getattribute__ and __setattr__ is they’re called on every
+attribute access for an object, even when you may not want that to happen.
+'''
+class BrokenDictionaryDB(object):
+    def __init__(self, data):
+        self._data = data
+
+    def __getattribute__(self, name):
+        print('Called __getattribute__(%s)' % name)
+        return self._data[name]
+
+
+data = BrokenDictionaryDB({'foo': 3})
+try:
+    data.foo
+except RecursionError as e:
+    print(e)
+
+
+
+'''
+The above class requires accessing self._data from the __getattribute__ method.
+However, if you actually try to do that, Python will recurse until it reaches
+its stack limit, and then it’ll die.
+
+The problem is that __getattribute__ accesses self._data, which causes
+__getattribute__ to run again, which accesses self._data again, and so on.
+
+The solution is to use the super().__getattribute__ method on your instance to
+fetch values from the instance attribute dictionary. This avoids the recursion.
+
+Even though id(self._data) == id(data_dict), when you access data_dict without
+self keyword, it doesn't actually call __getattribute__. So you can access it.
+'''
+class DictionaryDB(object):
+    def __init__(self, data):
+        self._data = data
+
+    def __getattribute__(self, name):
+        data_dict = super().__getattribute__('_data')
+        return data_dict[name]
+
+data = DictionaryDB({'foo': 3})
+print(data.foo)
