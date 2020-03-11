@@ -1,5 +1,4 @@
-### The Review of 
-### Effective Python: 59 Specific Ways to Write Better Python
+### The Review of "Effective Python: 59 Specific Ways to Write Better Python"
 #### Brett Slatkin
 
 ### Chapter 1: Pythonic Thinking
@@ -35,3 +34,12 @@
 - Item 26: Use Multiple Inheritance Only for Mix-in Utility Classes
 - Item 27: Prefer Public Attributes Over Private Ones
 - Item 28: Inherit from collections.abc for Custom Container Types
+
+### Chapter 4: Metclasses and Attributes
+- Item 29: Use Plain Attributes Instead of Get and Set Methods
+- Item 30: Consider @property Instead of Refactoring Attributes
+- Item 31: Use Descriptors for Reusable @property Methods
+- Item 32: Use __getattr__, __getattribute__, and __setattr__ for Lazy Attributes
+- Item 33: Validate Subclasses with Metaclasses
+- Item 34: Register Class Existence with Metaclasses
+- Item 35: Annotate Class Attributes with Metaclasses
