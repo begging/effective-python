@@ -14,7 +14,7 @@
 - Item 10: Prefer enumerate Over range
 - Item 11: Use zip to Process Iterators in Parallel
 - Item 12: Avoid else Blocks After for and while Loops
-- Item 13: Take Advantage of Each Block in try/except/else/finally 
+- Item 13: Take Advantage of Each Block in try/except/else/finally
 
 ### Chapter 2: Functions
 - Item 14: Prefer Exceptions to Returning None
@@ -39,7 +39,7 @@
 - Item 29: Use Plain Attributes Instead of Get and Set Methods
 - Item 30: Consider @property Instead of Refactoring Attributes
 - Item 31: Use Descriptors for Reusable @property Methods
-- Item 32: Use __getattr__, __getattribute__, and __setattr__ for Lazy Attributes
+- Item 32: Use \_\_getattr\_\_, \_\_getattribute\_\_, and \_\_setattr\_\_ for Lazy Attributes
 - Item 33: Validate Subclasses with Metaclasses
 - Item 34: Register Class Existence with Metaclasses
 - Item 35: Annotate Class Attributes with Metaclasses
